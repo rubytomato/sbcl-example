@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class ServiceAlpha {
 
@@ -13,19 +16,20 @@ public class ServiceAlpha {
     private JdbcTemplate jdbc;
 
     public void execute() {
-    	System.out.println("*** alpha in ***");
+    	log.debug("*** alpha in ***");
+
     	if (jdbc == null) {
-    		System.out.println("jdbc null");
-    		return;
+    		throw new RuntimeException("JdbcTemplate is null");
     	}
     	Map<String, Object> result = jdbc.queryForMap("select now() as current");
     	if (result == null) {
-    		System.out.println("result null");
+    		log.debug("result null");
     		return;
     	}
     	result.forEach((k,v)->{
-    		System.out.println("key:{" + k + "} value:{" + v + "}");
+    		log.debug("key:{} value:{}", k, v);
     	});
-    	System.out.println("*** alpha out ***");
+
+    	log.debug("*** alpha out ***");
     }
 }

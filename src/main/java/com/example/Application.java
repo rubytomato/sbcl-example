@@ -1,40 +1,51 @@
 package com.example;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.example.service.ServiceAlpha;
+import com.example.service.ServiceBeta;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootApplication
 public class Application {
 
 	@Autowired
 	ServiceAlpha alpha;
 
+	@Autowired
+	ServiceBeta beta;
+
 	public static void main(String[] args) {
-		System.out.println(">>> call main");
+		log.debug(">>> call main");
         try (ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args)) {
         	Application app = ctx.getBean(Application.class);
         	app.run(args);
         }
-		System.out.println("<<< main end");
+        log.debug("<<< main end");
 	}
 
 	@PostConstruct
 	public void init() {
-		System.out.println("application init");
+		log.debug("application init");
 	}
 
-	public void run(String... args) {
-		System.out.println("run");
-		System.out.println(StringUtils.join(args, ","));
+	@PreDestroy
+	public void destory() {
+		log.debug("application finish");
+	}
+
+	public void run(final String... args) {
+		log.debug("application run");
 		alpha.execute();
+		beta.execute(args);
 	}
-
 	
 }
