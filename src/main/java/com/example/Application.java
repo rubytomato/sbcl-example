@@ -10,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import com.example.service.ServiceAlpha;
 import com.example.service.ServiceBeta;
+import com.example.service.ServiceGamma;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +23,9 @@ public class Application {
 
 	@Autowired
 	ServiceBeta beta;
+
+	@Autowired
+	ServiceGamma gamma;
 
 	public static void main(String[] args) {
 		log.debug(">>> call main");
@@ -46,6 +50,7 @@ public class Application {
 		log.debug("application run");
 		alpha.execute();
 		beta.execute(args);
+		gamma.execute();
 	}
 	
 }

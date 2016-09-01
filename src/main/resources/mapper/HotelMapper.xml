@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.HotelMapper">
+
+    <select id="selectHotelById" resultType="Hotel">
+        SELECT * FROM hotel WHERE id = #{id}
+    </select>
+
+    <resultMap id="selectByCityIdMap" type="Hotel">
+      <id property="id" column="ホテルID" />
+      <result property="city" column="都市ID" />
+      <result property="name" column="ホテル名" />
+      <result property="address" column="住所" />
+      <result property="zip" column="郵便番号" />
+    </resultMap>
+
+    <select id="selectByCityId" resultMap="selectByCityIdMap">
+        SELECT * FROM hotel WHERE city = #{id}
+    </select>
+    
+</mapper>
