@@ -29,18 +29,20 @@ public class Application {
 
 	public static void main(String[] args) {
 		log.debug(">>> call main");
-        try (ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args)) {
-        	Application app = ctx.getBean(Application.class);
-        	app.run(args);
-        }
-        log.debug("<<< main end");
+		try (ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args)) {
+			Application app = ctx.getBean(Application.class);
+			app.run(args);
+		}
+		log.debug("<<< main end");
 	}
 
+	//FIXME あとで実装の変更が必要
 	@PostConstruct
 	public void init() {
 		log.debug("application init");
 	}
 
+	//TODO 処理方法の見直しをする
 	@PreDestroy
 	public void destory() {
 		log.debug("application finish");
