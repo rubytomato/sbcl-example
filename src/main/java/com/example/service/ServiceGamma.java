@@ -22,34 +22,34 @@ public class ServiceGamma {
 	@Autowired
 	private HotelMapper hotelMapper;
 
-    public void execute() {
-    	log.debug("*** gamma in ***");
+	public void execute() {
+		log.debug("*** gamma in ***");
 
-    	City city = cityMapper.selectCityById(1L);
-    	log.debug("city:{}", city);
+		City city = cityMapper.selectCityById(1L);
+		log.debug("city:{}", city);
 
-    	List<City> cityList = cityMapper.findByState("CA");
-    	if (cityList != null) {
-    		cityList.forEach(c -> {
-    			log.debug("city:{}",c);
-    		});
-    	} else {
-    		log.debug("city list is null");
-    	}
+		List<City> cityList = cityMapper.findByState("CA");
+		if (cityList != null) {
+			cityList.forEach(c -> {
+				log.debug("city:{}",c);
+			});
+		} else {
+			log.debug("city list is null");
+		}
 
-    	Hotel hotel = hotelMapper.selectHotelById(1L);
-    	log.debug("hotel:{}", hotel);
+		Hotel hotel = hotelMapper.selectHotelById(1L);
+		log.debug("hotel:{}", hotel);
 
-    	List<Hotel> hotelList = hotelMapper.selectByCityId(1L);
-    	if (hotelList != null) {
-    		hotelList.forEach(h -> {
-    			log.debug("hotel:{}",h);
-    		});
-    	} else {
-    		log.debug("hotel list is null");
-    	}
+		List<Hotel> hotelList = hotelMapper.selectByCityId(1L);
+		if (hotelList != null) {
+			hotelList.forEach(h -> {
+				log.debug("hotel:{}",h);
+			});
+		} else {
+			log.debug("hotel list is null");
+		}
 
-    	log.debug("*** gamma out ***");
-    }
+		log.debug("*** gamma out ***");
+	}
 
 }
